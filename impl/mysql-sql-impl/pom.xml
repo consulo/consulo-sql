@@ -15,13 +15,14 @@
   - See the License for the specific language governing permissions and
   - limitations under the License.
   -->
+
 <project xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns="http://maven.apache.org/POM/4.0.0"
          xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
     <modelVersion>4.0.0</modelVersion>
 
     <parent>
         <groupId>consulo</groupId>
-        <artifactId>arch.managment</artifactId>
+        <artifactId>arch.bind.java</artifactId>
         <version>3-SNAPSHOT</version>
         <relativePath/>
     </parent>
@@ -38,20 +39,45 @@
     </repositories>
 
     <groupId>consulo.plugin</groupId>
-    <artifactId>consulo.sql.parent</artifactId>
+    <artifactId>consulo.sql.mysql.impl</artifactId>
     <version>3-SNAPSHOT</version>
-    <packaging>pom</packaging>
+    <packaging>jar</packaging>
 
-    <modules>
-        <module>language-api</module>
-        <module>language-impl</module>
-        <module>plugin</module>
+    <build>
+        <plugins>
+            <plugin>
+                <groupId>consulo.maven</groupId>
+                <artifactId>maven-consulo-plugin</artifactId>
+                <extensions>true</extensions>
+                <executions>
+                    <execution>
+                        <phase>generate-sources</phase>
+                        <goals>
+                            <goal>generate-lexers</goal>
+                        </goals>
+                    </execution>
+                </executions>
+            </plugin>
+        </plugins>
+    </build>
 
-        <module>impl/mariadb-sql-impl</module>
-        <module>impl/mysql-sql-impl</module>
-        <module>impl/oracle-sql-impl</module>
-        <module>impl/postgresql-sql-impl</module>
-        <module>impl/sqlite-sql-impl</module>
-        <module>impl/tsql-impl</module>
-    </modules>
+    <dependencies>
+        <dependency>
+            <groupId>consulo</groupId>
+            <artifactId>consulo-language-impl</artifactId>
+            <version>${project.version}</version>
+        </dependency>
+
+        <dependency>
+            <groupId>${project.groupId}</groupId>
+            <artifactId>consulo.sql.language.api</artifactId>
+            <version>${project.version}</version>
+        </dependency>
+
+        <dependency>
+            <groupId>${project.groupId}</groupId>
+            <artifactId>consulo.sql.language.impl</artifactId>
+            <version>${project.version}</version>
+        </dependency>
+    </dependencies>
 </project>

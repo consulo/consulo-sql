@@ -1,0 +1,8 @@
+CREATE FUNCTION add_numbers(a INTEGER, b INTEGER)
+RETURNS INTEGER
+LANGUAGE plpgsql
+AS $$
+BEGIN
+    RETURN a + b;
+END;
+$$;

@@ -19,6 +19,7 @@ package consulo.sql.language;
 import consulo.language.file.LanguageFileType;
 import consulo.localize.LocalizeValue;
 import consulo.sql.lang.api.icon.SqlLangApiIconGroup;
+import consulo.sql.language.icon.SqlIconGroup;
 import consulo.ui.image.Image;
 import jakarta.annotation.Nonnull;
 
@@ -54,6 +55,6 @@ public class SqlFileType extends LanguageFileType {
     @Nonnull
     @Override
     public Image getIcon() {
-        return SqlLangApiIconGroup.sql();
+        return SqlIconGroup.sql();
     }
 }

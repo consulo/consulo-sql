@@ -1,0 +1,9 @@
+CREATE OR REPLACE FUNCTION get_user_count()
+RETURNS INTEGER
+LANGUAGE plpgsql
+STABLE
+AS $$
+BEGIN
+    RETURN 0;
+END;
+$$;
