@@ -1,0 +1,6 @@
+DROP TABLE users;
+DROP TABLE IF EXISTS users;
+DROP TABLE users CASCADE;
+DROP TABLE users RESTRICT;
+DROP VIEW active_users;
+DROP INDEX idx_name;

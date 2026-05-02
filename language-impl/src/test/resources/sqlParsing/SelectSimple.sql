@@ -1,0 +1,13 @@
+SELECT * FROM users;
+SELECT id, name, email FROM users;
+SELECT DISTINCT status FROM orders;
+SELECT ALL name FROM products;
+SELECT id AS user_id, name AS user_name FROM users;
+SELECT id user_id, name user_name FROM users;
+SELECT 42;
+SELECT 'hello';
+SELECT NULL;
+SELECT TRUE;
+SELECT FALSE;
+SELECT CURRENT_DATE;
+SELECT CURRENT_TIMESTAMP;

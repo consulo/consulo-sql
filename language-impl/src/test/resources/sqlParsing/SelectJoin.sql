@@ -1,0 +1,12 @@
+SELECT * FROM users JOIN orders ON users.id = orders.user_id;
+SELECT * FROM users INNER JOIN orders ON users.id = orders.user_id;
+SELECT * FROM users LEFT JOIN orders ON users.id = orders.user_id;
+SELECT * FROM users LEFT OUTER JOIN orders ON users.id = orders.user_id;
+SELECT * FROM users RIGHT JOIN orders ON users.id = orders.user_id;
+SELECT * FROM users RIGHT OUTER JOIN orders ON users.id = orders.user_id;
+SELECT * FROM users FULL JOIN orders ON users.id = orders.user_id;
+SELECT * FROM users FULL OUTER JOIN orders ON users.id = orders.user_id;
+SELECT * FROM users CROSS JOIN roles;
+SELECT * FROM users NATURAL JOIN orders;
+SELECT * FROM users JOIN orders USING (user_id);
+SELECT * FROM a JOIN b ON a.id = b.a_id JOIN c ON b.id = c.b_id;

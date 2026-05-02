@@ -1,0 +1,122 @@
+parser.expression.expected:
+  text: Expression expected
+parser.statement.expected:
+  text: Expected SQL statement
+parser.values.or.select.expected:
+  text: "'VALUES' or 'SELECT' expected"
+parser.index.expected:
+  text: "'INDEX' expected"
+parser.table.view.or.index.expected:
+  text: "'TABLE', 'VIEW', or 'INDEX' expected"
+parser.data.type.expected:
+  text: Data type expected
+parser.delete.or.update.expected:
+  text: "'DELETE' or 'UPDATE' expected"
+parser.null.expected:
+  text: "'NULL' expected"
+parser.identifier.expected:
+  text: Identifier expected
+parser.alias.name.expected:
+  text: Alias name expected
+parser.column.name.expected:
+  text: Column name expected
+parser.constraint.name.expected:
+  text: Constraint name expected
+parser.name.expected:
+  text: Name expected
+parser.precision.expected:
+  text: Precision expected
+parser.scale.expected:
+  text: Scale expected
+parser.lpar.expected:
+  text: "'(' expected"
+parser.rpar.expected:
+  text: "')' expected"
+parser.eq.expected:
+  text: "'=' expected"
+parser.select.expected:
+  text: "'SELECT' expected"
+parser.from.expected:
+  text: "'FROM' expected"
+parser.join.expected:
+  text: "'JOIN' expected"
+parser.where.expected:
+  text: "'WHERE' expected"
+parser.group.expected:
+  text: "'GROUP' expected"
+parser.by.expected:
+  text: "'BY' expected"
+parser.having.expected:
+  text: "'HAVING' expected"
+parser.order.expected:
+  text: "'ORDER' expected"
+parser.insert.expected:
+  text: "'INSERT' expected"
+parser.into.expected:
+  text: "'INTO' expected"
+parser.values.expected:
+  text: "'VALUES' expected"
+parser.update.expected:
+  text: "'UPDATE' expected"
+parser.set.expected:
+  text: "'SET' expected"
+parser.delete.expected:
+  text: "'DELETE' expected"
+parser.create.expected:
+  text: "'CREATE' expected"
+parser.drop.expected:
+  text: "'DROP' expected"
+parser.alter.expected:
+  text: "'ALTER' expected"
+parser.table.expected:
+  text: "'TABLE' expected"
+parser.as.expected:
+  text: "'AS' expected"
+parser.on.expected:
+  text: "'ON' expected"
+parser.key.expected:
+  text: "'KEY' expected"
+parser.references.expected:
+  text: "'REFERENCES' expected"
+parser.action.expected:
+  text: "'ACTION' expected"
+parser.exists.expected:
+  text: "'EXISTS' expected"
+parser.and.expected:
+  text: "'AND' expected"
+parser.case.expected:
+  text: "'CASE' expected"
+parser.then.expected:
+  text: "'THEN' expected"
+parser.end.expected:
+  text: "'END' expected"
+parser.cast.expected:
+  text: "'CAST' expected"
+parser.function.expected:
+  text: "'FUNCTION' expected"
+parser.procedure.expected:
+  text: "'PROCEDURE' expected"
+parser.language.expected:
+  text: "'LANGUAGE' expected"
+parser.returns.expected:
+  text: "'RETURNS' expected"
+parser.begin.expected:
+  text: "'BEGIN' expected"
+parser.dollar.quote.expected:
+  text: Dollar-quoted string expected
+parser.declare.or.begin.expected:
+  text: "'DECLARE' or 'BEGIN' expected"
+parser.semicolon.expected:
+  text: "';' expected"
+parser.then.keyword.expected:
+  text: "'THEN' expected"
+parser.end.if.expected:
+  text: "'END IF' expected"
+parser.end.loop.expected:
+  text: "'END LOOP' expected"
+parser.loop.expected:
+  text: "'LOOP' expected"
+parser.in.expected:
+  text: "'IN' expected"
+parser.or.replace.expected:
+  text: "'OR REPLACE' expected"

@@ -1,0 +1,18 @@
+SELECT * FROM users WHERE id = 1;
+SELECT * FROM users WHERE name = 'John' AND status = 'active';
+SELECT * FROM users WHERE age > 18 OR role = 'admin';
+SELECT * FROM users WHERE NOT deleted;
+SELECT * FROM users WHERE name LIKE '%john%';
+SELECT * FROM users WHERE name LIKE 'J%' ESCAPE '!';
+SELECT * FROM users WHERE name NOT LIKE '%test%';
+SELECT * FROM users WHERE id IN (1, 2, 3);
+SELECT * FROM users WHERE id NOT IN (SELECT blocked_id FROM blocked);
+SELECT * FROM users WHERE age BETWEEN 18 AND 65;
+SELECT * FROM users WHERE age NOT BETWEEN 0 AND 17;
+SELECT * FROM users WHERE email IS NULL;
+SELECT * FROM users WHERE email IS NOT NULL;
+SELECT * FROM users WHERE EXISTS (SELECT 1 FROM orders WHERE orders.user_id = users.id);
+SELECT * FROM t WHERE a <> b;
+SELECT * FROM t WHERE a != b;
+SELECT * FROM t WHERE a <= b;
+SELECT * FROM t WHERE a >= b;
