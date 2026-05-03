@@ -5,18 +5,24 @@ import consulo.annotation.component.ServiceAPI;
 import consulo.annotation.component.ServiceImpl;
 import consulo.component.persist.State;
 import consulo.component.persist.Storage;
+import consulo.language.impl.util.LanguagePerFileMappings;
 import consulo.language.impl.util.PerFileMappingsBase;
+import consulo.language.localize.LanguageLocalize;
 import consulo.language.version.LanguageVersion;
 import consulo.project.Project;
 import consulo.sql.language.SqlDefaultVersionResolver;
 import consulo.sql.language.SqlLanguage;
 import consulo.sql.language.impl.version.sql92.Sql92LanguageVersion;
+import consulo.util.lang.StringUtil;
+import consulo.util.lang.Trinity;
 import consulo.virtualFileSystem.VirtualFile;
 import jakarta.inject.Inject;
 import jakarta.inject.Singleton;
 import org.jspecify.annotations.Nullable;
 
 import java.util.List;
+import java.util.function.Consumer;
+import java.util.function.Supplier;
 
 /**
  * @author VISTALL
@@ -35,6 +41,7 @@ public class SqlDialectService extends PerFileMappingsBase<LanguageVersion> {
         myProject = project;
         myDefaultVersion = SqlLanguage.INSTANCE.findVersionByClass(Sql92LanguageVersion.class);
     }
+
 
     @Nullable
     @Override
