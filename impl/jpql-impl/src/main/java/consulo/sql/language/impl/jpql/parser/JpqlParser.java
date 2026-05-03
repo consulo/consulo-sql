@@ -119,7 +119,31 @@ public class JpqlParser extends SqlParser {
             return true;
         }
 
+        // JPQL-reserved scalar functions: CONCAT/LENGTH/ABS/MOD/SQRT/LOCATE
+        // These are reserved keyword tokens in JPQL/HQL (so they don't reach
+        // the IDENTIFIERS branch the way they would in plain SQL dialects),
+        // but syntactically they're ordinary n-ary function calls.
+        if (isJpqlScalarFunction(token)
+            && lookAheadTokenIs(builder, SqlTokenType.LPAR)) {
+            parseFunctionCall(builder);
+            return true;
+        }
+
         return false;
+    }
+
+    /**
+     * Standard JPQL scalar functions that are <em>reserved keywords</em> per
+     * the spec but otherwise behave like ordinary function calls. Subclasses
+     * (HQL) may extend with their own dialect-specific entries.
+     */
+    protected boolean isJpqlScalarFunction(IElementType token) {
+        return token == SqlKeywordTokenTypes.CONCAT_KEYWORD
+            || token == SqlKeywordTokenTypes.LENGTH_KEYWORD
+            || token == SqlKeywordTokenTypes.ABS_KEYWORD
+            || token == SqlKeywordTokenTypes.MOD_KEYWORD
+            || token == SqlKeywordTokenTypes.SQRT_KEYWORD
+            || token == SqlKeywordTokenTypes.LOCATE_KEYWORD;
     }
 
     /**
