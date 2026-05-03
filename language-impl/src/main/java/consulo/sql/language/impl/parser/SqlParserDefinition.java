@@ -115,6 +115,21 @@ public class SqlParserDefinition extends LanguageVersionableParserDefinition {
         if (type == SqlCompositeElementTypes.COLUMN_DEFINITION) {
             return new SqlColumnDefinitionImpl(node);
         }
+        if (type == SqlCompositeElementTypes.NAMED_PLACEHOLDER_EXPRESSION) {
+            return new SqlNamedPlaceholderExpressionImpl(node);
+        }
+        if (type == SqlCompositeElementTypes.NAMED_PLACEHOLDER_REFERENCE) {
+            return new SqlNamedPlaceholderReferenceImpl(node);
+        }
+        if (type == SqlCompositeElementTypes.POSITION_PLACEHOLDER_EXPRESSION) {
+            return new SqlPositionPlaceholderExpressionImpl(node);
+        }
+        if (type == SqlCompositeElementTypes.PLACEHOLDER_POSITION) {
+            return new SqlPlaceholderPositionImpl(node);
+        }
+        if (type == SqlCompositeElementTypes.ANONYMOUS_PLACEHOLDER_EXPRESSION) {
+            return new SqlAnonymousPlaceholderExpressionImpl(node);
+        }
 
         return new SqlCompositeElementImpl(node);
     }

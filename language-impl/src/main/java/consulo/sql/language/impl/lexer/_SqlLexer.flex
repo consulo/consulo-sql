@@ -49,6 +49,10 @@ NUMBER={DIGIT}+
 
 <YYINITIAL> {NUMBER} { return SqlTokenType.NUMBER; }
 
+<YYINITIAL> "?" { return SqlTokenType.QUESTION; }
+
+<YYINITIAL> ":" { return SqlTokenType.COLON; }
+
 <YYINITIAL> "(" { return SqlTokenType.LPAR; }
 
 <YYINITIAL> ")" { return SqlTokenType.RPAR; }

@@ -1084,7 +1084,13 @@ public class SqlParser implements PsiParser {
             return;
         }
 
-        if (token == SqlTokenType.NUMBER) {
+        if (token == SqlTokenType.QUESTION) {
+            parseQuestionPlaceholder(builder);
+        }
+        else if (token == SqlTokenType.COLON) {
+            parseNamedPlaceholder(builder);
+        }
+        else if (token == SqlTokenType.NUMBER) {
             PsiBuilder.Marker mark = builder.mark();
             builder.advanceLexer();
             mark.done(SqlCompositeElementTypes.LITERAL_EXPRESSION);
@@ -1302,6 +1308,39 @@ public class SqlParser implements PsiParser {
 
         expectKeyword(builder, SqlKeywordTokenTypes.END_KEYWORD, SqlLocalize.parserEndExpected());
         mark.done(SqlCompositeElementTypes.CASE_EXPRESSION);
+    }
+
+    private void parseQuestionPlaceholder(PsiBuilder builder) {
+        PsiBuilder.Marker mark = builder.mark();
+        builder.advanceLexer(); // ?
+        if (isToken(builder, SqlTokenType.NUMBER)) {
+            PsiBuilder.Marker posMark = builder.mark();
+            builder.advanceLexer();
+            posMark.done(SqlCompositeElementTypes.PLACEHOLDER_POSITION);
+            mark.done(SqlCompositeElementTypes.POSITION_PLACEHOLDER_EXPRESSION);
+        }
+        else {
+            mark.done(SqlCompositeElementTypes.ANONYMOUS_PLACEHOLDER_EXPRESSION);
+        }
+    }
+
+    private void parseNamedPlaceholder(PsiBuilder builder) {
+        // A bare ':' is not a placeholder — emit an error and consume the colon.
+        IElementType next = builder.lookAhead(1);
+        if (next == null
+            || (!SqlTokenType.IDENTIFIERS.contains(next) && !(next instanceof SqlKeywordElementType))) {
+            PsiBuilder.Marker errMark = builder.mark();
+            builder.advanceLexer(); // :
+            errMark.error(SqlLocalize.parserIdentifierExpected());
+            return;
+        }
+
+        PsiBuilder.Marker mark = builder.mark();
+        builder.advanceLexer(); // :
+        PsiBuilder.Marker refMark = builder.mark();
+        builder.advanceLexer(); // identifier
+        refMark.done(SqlCompositeElementTypes.NAMED_PLACEHOLDER_REFERENCE);
+        mark.done(SqlCompositeElementTypes.NAMED_PLACEHOLDER_EXPRESSION);
     }
 
     private void parseCastExpression(PsiBuilder builder) {

@@ -61,6 +61,21 @@ public class PostgreSqlParsingTest extends SimpleParsingTest<Object> {
         doTest(context, null);
     }
 
+    @Test
+    public void testAnonymousPlaceholder(Context context) throws Exception {
+        doTest(context, null);
+    }
+
+    @Test
+    public void testPositionPlaceholder(Context context) throws Exception {
+        doTest(context, null);
+    }
+
+    @Test
+    public void testNamedPlaceholder(Context context) throws Exception {
+        doTest(context, null);
+    }
+
     @Nonnull
     @Override
     protected LanguageFileType getFileType(@Nonnull Context context, @Nullable Object testContext) {
@@ -69,11 +84,6 @@ public class PostgreSqlParsingTest extends SimpleParsingTest<Object> {
 
     @Override
     protected LanguageVersion resolveLanguageVersion(Context context, @Nullable Object testContext, FileType fileType) {
-        for (LanguageVersion version : SqlLanguage.INSTANCE.getVersions()) {
-            if (version instanceof PostgreSqlLanguageVersion) {
-                return version;
-            }
-        }
-        throw new IllegalStateException("PostgreSqlLanguageVersion not found");
+        return SqlLanguage.INSTANCE.findVersionByClass(PostgreSqlLanguageVersion.class);
     }
 }

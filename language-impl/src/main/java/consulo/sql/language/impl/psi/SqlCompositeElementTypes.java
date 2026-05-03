@@ -68,6 +68,13 @@ public interface SqlCompositeElementTypes {
     IElementType CAST_EXPRESSION = new IElementType("SQL_CAST_EXPRESSION", SqlLanguage.INSTANCE);
     IElementType STAR_EXPRESSION = new IElementType("SQL_STAR_EXPRESSION", SqlLanguage.INSTANCE);
 
+    // Placeholders
+    IElementType ANONYMOUS_PLACEHOLDER_EXPRESSION = new IElementType("SQL_ANONYMOUS_PLACEHOLDER_EXPRESSION", SqlLanguage.INSTANCE);
+    IElementType POSITION_PLACEHOLDER_EXPRESSION = new IElementType("SQL_POSITION_PLACEHOLDER_EXPRESSION", SqlLanguage.INSTANCE);
+    IElementType PLACEHOLDER_POSITION = new IElementType("SQL_PLACEHOLDER_POSITION", SqlLanguage.INSTANCE);
+    IElementType NAMED_PLACEHOLDER_EXPRESSION = new IElementType("SQL_NAMED_PLACEHOLDER_EXPRESSION", SqlLanguage.INSTANCE);
+    IElementType NAMED_PLACEHOLDER_REFERENCE = new IElementType("SQL_NAMED_PLACEHOLDER_REFERENCE", SqlLanguage.INSTANCE);
+
     // Table references
     IElementType TABLE_EXPRESSION = new IElementType("SQL_TABLE_EXPRESSION", SqlLanguage.INSTANCE);
     IElementType JOIN_EXPRESSION = new IElementType("SQL_JOIN_EXPRESSION", SqlLanguage.INSTANCE);

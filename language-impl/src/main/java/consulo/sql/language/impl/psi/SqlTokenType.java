@@ -76,6 +76,16 @@ public interface SqlTokenType extends TokenType {
 
     IElementType CONCAT = new IElementType("SQL_CONCAT", SqlLanguage.INSTANCE);
 
+    /**
+     * Question mark, used as positional placeholder marker: {@code ?} or {@code ?N}.
+     */
+    IElementType QUESTION = new IElementType("SQL_QUESTION", SqlLanguage.INSTANCE);
+
+    /**
+     * Colon, used as named placeholder marker: {@code :name}.
+     */
+    IElementType COLON = new IElementType("SQL_COLON", SqlLanguage.INSTANCE);
+
     TokenSet IDENTIFIERS = TokenSet.create(IDENTIFIER, BACKTICK_QUOTED_IDENTIFIER, DOUBLE_QUOTED_IDENTIFIER, BRACKET_QUOTED_IDENTIFIER);
 
     TokenSet COMMENTS = TokenSet.create(C_STYLE_COMMENT, END_OF_LINE_COMMENT);
