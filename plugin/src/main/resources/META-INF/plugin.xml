@@ -22,7 +22,6 @@
     <description>SQL support. MariaSQL, MySQL, PostgreSQL, TSQL, SQLLite, OracleSQL</description>
 
     <tags>
-        <tag>database</tag>
         <tag>custom.language</tag>
     </tags>
 </consulo-plugin>
