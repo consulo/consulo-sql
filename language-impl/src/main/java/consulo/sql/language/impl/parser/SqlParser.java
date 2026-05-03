@@ -311,6 +311,8 @@ public class SqlParser implements PsiParser {
 
         expectKeyword(builder, SqlKeywordTokenTypes.JOIN_KEYWORD, SqlLocalize.parserJoinExpected());
 
+        parseJoinModifiers(builder);
+
         parseTablePrimary(builder);
 
         if (isToken(builder, SqlKeywordTokenTypes.ON_KEYWORD)) {
@@ -970,7 +972,7 @@ public class SqlParser implements PsiParser {
         }
     }
 
-    private void parseComparisonExpression(PsiBuilder builder) {
+    protected void parseComparisonExpression(PsiBuilder builder) {
         PsiBuilder.Marker left = builder.mark();
         parseAdditiveExpression(builder);
 
@@ -982,17 +984,7 @@ public class SqlParser implements PsiParser {
             left.done(SqlCompositeElementTypes.BINARY_EXPRESSION);
         }
         else if (token == SqlKeywordTokenTypes.IS_KEYWORD) {
-            builder.advanceLexer();
-            if (isToken(builder, SqlKeywordTokenTypes.NOT_KEYWORD)) {
-                builder.advanceLexer();
-            }
-            if (isToken(builder, SqlKeywordTokenTypes.NULL_KEYWORD)) {
-                builder.advanceLexer();
-            }
-            else {
-                builder.error(SqlLocalize.parserNullExpected());
-            }
-            left.done(SqlCompositeElementTypes.IS_NULL_EXPRESSION);
+            parseIsTail(builder, left);
         }
         else if (token == SqlKeywordTokenTypes.IN_KEYWORD || (token == SqlKeywordTokenTypes.NOT_KEYWORD && lookAheadTokenIs(builder, SqlKeywordTokenTypes.IN_KEYWORD))) {
             if (token == SqlKeywordTokenTypes.NOT_KEYWORD) {
@@ -1032,9 +1024,57 @@ public class SqlParser implements PsiParser {
             }
             left.done(SqlCompositeElementTypes.LIKE_EXPRESSION);
         }
+        else if (parseExtendedComparison(builder, left, token)) {
+            // consumed by subclass
+        }
         else {
             left.drop();
         }
+    }
+
+    /**
+     * Parses the tail of an {@code IS …} predicate &mdash; the part after the
+     * {@code IS} keyword. Caller has not yet consumed {@code IS}.
+     * <p>
+     * Base implementation handles {@code IS [NOT] NULL}. Subclasses (JPQL/HQL)
+     * may extend with {@code IS [NOT] EMPTY} etc.
+     *
+     * @param left the marker started before the left operand; subclass must
+     *             {@code done} or {@code drop} it before returning.
+     */
+    protected void parseIsTail(PsiBuilder builder, PsiBuilder.Marker left) {
+        builder.advanceLexer(); // IS
+        if (isToken(builder, SqlKeywordTokenTypes.NOT_KEYWORD)) {
+            builder.advanceLexer();
+        }
+        if (isToken(builder, SqlKeywordTokenTypes.NULL_KEYWORD)) {
+            builder.advanceLexer();
+        }
+        else {
+            builder.error(SqlLocalize.parserNullExpected());
+        }
+        left.done(SqlCompositeElementTypes.IS_NULL_EXPRESSION);
+    }
+
+    /**
+     * Hook for subclasses to add additional binary predicates after the
+     * built-in IN / BETWEEN / LIKE / IS handling fails to match.
+     * <p>
+     * Implementations consume tokens and call {@link PsiBuilder.Marker#done}
+     * on {@code left} when they take ownership, returning {@code true}. If they
+     * decline they MUST NOT advance the lexer or touch {@code left} and must
+     * return {@code false}; the caller will drop the marker.
+     */
+    protected boolean parseExtendedComparison(PsiBuilder builder, PsiBuilder.Marker left, IElementType token) {
+        return false;
+    }
+
+    /**
+     * Hook called inside {@code parseJoin} immediately after the {@code JOIN}
+     * keyword and before the joined table primary. JPQL/HQL use this to consume
+     * an optional {@code FETCH} keyword.
+     */
+    protected void parseJoinModifiers(PsiBuilder builder) {
     }
 
     private void parseAdditiveExpression(PsiBuilder builder) {
@@ -1077,10 +1117,14 @@ public class SqlParser implements PsiParser {
         }
     }
 
-    private void parsePrimaryExpression(PsiBuilder builder) {
+    protected void parsePrimaryExpression(PsiBuilder builder) {
         IElementType token = builder.getTokenType();
         if (token == null) {
             builder.error(SqlLocalize.parserExpressionExpected());
+            return;
+        }
+
+        if (parseSpecialFunctionCall(builder, token)) {
             return;
         }
 
@@ -1195,7 +1239,17 @@ public class SqlParser implements PsiParser {
             || token == SqlKeywordTokenTypes.BIT_LENGTH_KEYWORD;
     }
 
-    private void parseFunctionCall(PsiBuilder builder) {
+    /**
+     * Hook for subclasses to recognise dialect-specific syntactic forms before
+     * the generic primary-expression dispatch. Implementations should consume
+     * tokens and emit a marker, returning {@code true}; otherwise return
+     * {@code false} without touching the lexer or starting markers.
+     */
+    protected boolean parseSpecialFunctionCall(PsiBuilder builder, IElementType token) {
+        return false;
+    }
+
+    protected void parseFunctionCall(PsiBuilder builder) {
         PsiBuilder.Marker mark = builder.mark();
         builder.advanceLexer(); // function name keyword
 

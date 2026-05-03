@@ -130,6 +130,21 @@ public class SqlParserDefinition extends LanguageVersionableParserDefinition {
         if (type == SqlCompositeElementTypes.ANONYMOUS_PLACEHOLDER_EXPRESSION) {
             return new SqlAnonymousPlaceholderExpressionImpl(node);
         }
+        if (type == SqlCompositeElementTypes.IS_EMPTY_EXPRESSION) {
+            return new SqlIsEmptyExpressionImpl(node);
+        }
+        if (type == SqlCompositeElementTypes.MEMBER_OF_EXPRESSION) {
+            return new SqlMemberOfExpressionImpl(node);
+        }
+        if (type == SqlCompositeElementTypes.TREAT_EXPRESSION) {
+            return new SqlTreatExpressionImpl(node);
+        }
+        if (type == SqlCompositeElementTypes.PATH_FUNCTION_EXPRESSION) {
+            return new SqlPathFunctionExpressionImpl(node);
+        }
+        if (type == SqlCompositeElementTypes.NAMED_FUNCTION_CALL_EXPRESSION) {
+            return new SqlNamedFunctionCallImpl(node);
+        }
 
         return new SqlCompositeElementImpl(node);
     }

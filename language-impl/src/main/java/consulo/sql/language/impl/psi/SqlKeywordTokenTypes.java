@@ -457,6 +457,26 @@ public interface SqlKeywordTokenTypes {
 
     SqlKeywordElementType ATTACH_KEYWORD = new SqlKeywordElementType("ATTACH", SqlLanguage.INSTANCE);
 
+    // JPQL / HQL keywords
+    SqlKeywordElementType NEW_KEYWORD = new SqlKeywordElementType("NEW", SqlLanguage.INSTANCE);
+    SqlKeywordElementType EMPTY_KEYWORD = new SqlKeywordElementType("EMPTY", SqlLanguage.INSTANCE);
+    SqlKeywordElementType MEMBER_KEYWORD = new SqlKeywordElementType("MEMBER", SqlLanguage.INSTANCE);
+    SqlKeywordElementType TREAT_KEYWORD = new SqlKeywordElementType("TREAT", SqlLanguage.INSTANCE);
+    SqlKeywordElementType TYPE_KEYWORD = new SqlKeywordElementType("TYPE", SqlLanguage.INSTANCE);
+    SqlKeywordElementType ENTRY_KEYWORD = new SqlKeywordElementType("ENTRY", SqlLanguage.INSTANCE);
+    SqlKeywordElementType OBJECT_KEYWORD = new SqlKeywordElementType("OBJECT", SqlLanguage.INSTANCE);
+    SqlKeywordElementType ABS_KEYWORD = new SqlKeywordElementType("ABS", SqlLanguage.INSTANCE);
+    SqlKeywordElementType MOD_KEYWORD = new SqlKeywordElementType("MOD", SqlLanguage.INSTANCE);
+    SqlKeywordElementType LOCATE_KEYWORD = new SqlKeywordElementType("LOCATE", SqlLanguage.INSTANCE);
+    SqlKeywordElementType CONCAT_KEYWORD = new SqlKeywordElementType("CONCAT", SqlLanguage.INSTANCE);
+    SqlKeywordElementType LENGTH_KEYWORD = new SqlKeywordElementType("LENGTH", SqlLanguage.INSTANCE);
+    SqlKeywordElementType SQRT_KEYWORD = new SqlKeywordElementType("SQRT", SqlLanguage.INSTANCE);
+    // HQL extras (beyond JPQL)
+    SqlKeywordElementType ELEMENTS_KEYWORD = new SqlKeywordElementType("ELEMENTS", SqlLanguage.INSTANCE);
+    SqlKeywordElementType INDICES_KEYWORD = new SqlKeywordElementType("INDICES", SqlLanguage.INSTANCE);
+    SqlKeywordElementType CLASS_KEYWORD = new SqlKeywordElementType("CLASS", SqlLanguage.INSTANCE);
+    SqlKeywordElementType VERSIONED_KEYWORD = new SqlKeywordElementType("VERSIONED", SqlLanguage.INSTANCE);
+
     static void init() {
         // just empty method for initialize constants
     }

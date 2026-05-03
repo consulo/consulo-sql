@@ -1,0 +1,1 @@
+SELECT b FROM Book b WHERE b.tags IS NOT EMPTY;

@@ -1,4 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
+
 <!--
   - Copyright 2013-2026 consulo.io
   -
@@ -14,20 +15,17 @@
   - See the License for the specific language governing permissions and
   - limitations under the License.
   -->
+
 <project xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns="http://maven.apache.org/POM/4.0.0"
          xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
     <modelVersion>4.0.0</modelVersion>
+
     <parent>
         <groupId>consulo</groupId>
         <artifactId>arch.bind.java</artifactId>
         <version>3-SNAPSHOT</version>
         <relativePath/>
     </parent>
-
-    <groupId>consulo.plugin</groupId>
-    <artifactId>consulo.sql</artifactId>
-    <version>3-SNAPSHOT</version>
-    <packaging>consulo-plugin</packaging>
 
     <repositories>
         <repository>
@@ -40,23 +38,22 @@
         </repository>
     </repositories>
 
+    <groupId>consulo.plugin</groupId>
+    <artifactId>consulo.sql.jpql.impl</artifactId>
+    <version>3-SNAPSHOT</version>
+    <packaging>jar</packaging>
+
     <build>
         <plugins>
             <plugin>
                 <groupId>consulo.maven</groupId>
                 <artifactId>maven-consulo-plugin</artifactId>
                 <extensions>true</extensions>
-                <configuration>
-                    <packaging>
-                        <skip>${dev.mode}</skip>
-                        <version>${build.number}</version>
-                    </packaging>
-                </configuration>
                 <executions>
                     <execution>
-                        <phase>package</phase>
+                        <phase>generate-sources</phase>
                         <goals>
-                            <goal>workspace</goal>
+                            <goal>generate-lexers</goal>
                         </goals>
                     </execution>
                 </executions>
@@ -66,54 +63,28 @@
 
     <dependencies>
         <dependency>
+            <groupId>consulo</groupId>
+            <artifactId>consulo-language-impl</artifactId>
+            <version>${project.version}</version>
+        </dependency>
+
+        <dependency>
             <groupId>${project.groupId}</groupId>
             <artifactId>consulo.sql.language.api</artifactId>
             <version>${project.version}</version>
         </dependency>
+
         <dependency>
             <groupId>${project.groupId}</groupId>
             <artifactId>consulo.sql.language.impl</artifactId>
             <version>${project.version}</version>
         </dependency>
+
         <dependency>
-            <groupId>${project.groupId}</groupId>
-            <artifactId>consulo.sql.mariadb.impl</artifactId>
+            <groupId>consulo</groupId>
+            <artifactId>consulo-test-junit-impl</artifactId>
             <version>${project.version}</version>
-        </dependency>
-        <dependency>
-            <groupId>${project.groupId}</groupId>
-            <artifactId>consulo.sql.mysql.impl</artifactId>
-            <version>${project.version}</version>
-        </dependency>
-        <dependency>
-            <groupId>${project.groupId}</groupId>
-            <artifactId>consulo.sql.oracle.impl</artifactId>
-            <version>${project.version}</version>
-        </dependency>
-        <dependency>
-            <groupId>${project.groupId}</groupId>
-            <artifactId>consulo.sql.postgresql.impl</artifactId>
-            <version>${project.version}</version>
-        </dependency>
-        <dependency>
-            <groupId>${project.groupId}</groupId>
-            <artifactId>consulo.sql.sqlite.impl</artifactId>
-            <version>${project.version}</version>
-        </dependency>
-        <dependency>
-            <groupId>${project.groupId}</groupId>
-            <artifactId>consulo.sql.tsql.impl</artifactId>
-            <version>${project.version}</version>
-        </dependency>
-        <dependency>
-            <groupId>${project.groupId}</groupId>
-            <artifactId>consulo.sql.jpql.impl</artifactId>
-            <version>${project.version}</version>
-        </dependency>
-        <dependency>
-            <groupId>${project.groupId}</groupId>
-            <artifactId>consulo.sql.hql.impl</artifactId>
-            <version>${project.version}</version>
+            <scope>test</scope>
         </dependency>
     </dependencies>
 </project>

@@ -1,0 +1,1 @@
+SELECT ELEMENTS(b.tags) FROM Book b;
