@@ -32,6 +32,7 @@ public interface SqlCompositeElementTypes {
     IElementType CREATE_TABLE_STATEMENT = new IElementType("SQL_CREATE_TABLE_STATEMENT", SqlLanguage.INSTANCE);
     IElementType DROP_TABLE_STATEMENT = new IElementType("SQL_DROP_TABLE_STATEMENT", SqlLanguage.INSTANCE);
     IElementType ALTER_TABLE_STATEMENT = new IElementType("SQL_ALTER_TABLE_STATEMENT", SqlLanguage.INSTANCE);
+    IElementType ANALYZE_STATEMENT = new IElementType("SQL_ANALYZE_STATEMENT", SqlLanguage.INSTANCE);
     IElementType CREATE_INDEX_STATEMENT = new IElementType("SQL_CREATE_INDEX_STATEMENT", SqlLanguage.INSTANCE);
     IElementType DROP_INDEX_STATEMENT = new IElementType("SQL_DROP_INDEX_STATEMENT", SqlLanguage.INSTANCE);
     IElementType CREATE_VIEW_STATEMENT = new IElementType("SQL_CREATE_VIEW_STATEMENT", SqlLanguage.INSTANCE);

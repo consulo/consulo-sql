@@ -76,6 +76,11 @@ public class PostgreSqlParsingTest extends SimpleParsingTest<Object> {
         doTest(context, null);
     }
 
+    @Test
+    public void testAnalyzeTable(Context context) throws Exception {
+        doTest(context, null);
+    }
+
     @Nonnull
     @Override
     protected LanguageFileType getFileType(@Nonnull Context context, @Nullable Object testContext) {

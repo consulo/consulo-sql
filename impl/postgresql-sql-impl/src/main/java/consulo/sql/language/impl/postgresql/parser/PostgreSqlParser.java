@@ -32,6 +32,30 @@ import consulo.sql.language.localize.SqlLocalize;
  * @since 2026-03-17
  */
 public class PostgreSqlParser extends SqlParser {
+    /**
+     * PostgreSQL form: {@code ANALYZE [VERBOSE] [tbl [, tbl]…]}. There is no
+     * {@code TABLE} keyword; the table list is optional.
+     */
+    @Override
+    protected void parseAnalyzeStatement(PsiBuilder builder) {
+        PsiBuilder.Marker mark = builder.mark();
+        expectKeyword(builder, SqlKeywordTokenTypes.ANALYZE_KEYWORD, SqlLocalize.parserStatementExpected());
+
+        if (isToken(builder, PostgreSqlTokenTypes.VERBOSE_KEYWORD)) {
+            builder.advanceLexer();
+        }
+
+        if (isIdentifier(builder)) {
+            parseAnalyzeTableRef(builder);
+            while (isToken(builder, SqlTokenType.COMMA)) {
+                builder.advanceLexer();
+                parseAnalyzeTableRef(builder);
+            }
+        }
+
+        mark.done(SqlCompositeElementTypes.ANALYZE_STATEMENT);
+    }
+
     @Override
     protected void parseStatement(PsiBuilder builder) {
         IElementType token = builder.getTokenType();

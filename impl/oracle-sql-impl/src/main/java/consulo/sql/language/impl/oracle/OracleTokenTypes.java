@@ -29,6 +29,7 @@ public interface OracleTokenTypes
 {
     SqlKeywordElementType[] RESERVED_KEYWORDS = {
             SqlKeywordTokenTypes.ACCESS_KEYWORD,
+            SqlKeywordTokenTypes.ANALYZE_KEYWORD,
             SqlKeywordTokenTypes.AUDIT_KEYWORD,
             SqlKeywordTokenTypes.BODY_KEYWORD,
             SqlKeywordTokenTypes.BOOLEAN_KEYWORD,

@@ -145,6 +145,9 @@ public class SqlParserDefinition extends LanguageVersionableParserDefinition {
         if (type == SqlCompositeElementTypes.NAMED_FUNCTION_CALL_EXPRESSION) {
             return new SqlNamedFunctionCallImpl(node);
         }
+        if (type == SqlCompositeElementTypes.ANALYZE_STATEMENT) {
+            return new SqlAnalyzeStatementImpl(node);
+        }
 
         return new SqlCompositeElementImpl(node);
     }

@@ -28,6 +28,7 @@ import consulo.sql.language.impl.psi.SqlKeywordTokenTypes;
 public interface MySqlTokenTypes
 {
     SqlKeywordElementType[] RESERVED_KEYWORDS = {
+            SqlKeywordTokenTypes.ANALYZE_KEYWORD,
             SqlKeywordTokenTypes.AUTO_INCREMENT_KEYWORD,
             SqlKeywordTokenTypes.BIGINT_KEYWORD,
             SqlKeywordTokenTypes.BINARY_KEYWORD,

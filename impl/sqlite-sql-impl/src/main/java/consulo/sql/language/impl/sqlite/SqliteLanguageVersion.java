@@ -18,9 +18,11 @@ package consulo.sql.language.impl.sqlite;
 
 import consulo.annotation.component.ExtensionImpl;
 import consulo.language.lexer.Lexer;
+import consulo.language.parser.PsiParser;
 import consulo.sql.language.impl.BaseSqlLanguageVersion;
 import consulo.sql.language.impl.lexer.SqlLexer;
 import consulo.sql.language.impl.sqlite.lexer._SqliteLexer;
+import consulo.sql.language.impl.sqlite.parser.SqliteParser;
 import consulo.sql.language.impl.version.sql92.Sql92TokenTypes;
 import jakarta.annotation.Nonnull;
 
@@ -41,5 +43,11 @@ public class SqliteLanguageVersion extends BaseSqlLanguageVersion {
     @Override
     public Lexer createLexer() {
         return new SqlLexer(this, new _SqliteLexer());
+    }
+
+    @Nonnull
+    @Override
+    public PsiParser createParser() {
+        return new SqliteParser();
     }
 }

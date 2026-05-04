@@ -86,10 +86,41 @@ public class SqlParser implements PsiParser {
         else if (token == SqlKeywordTokenTypes.ALTER_KEYWORD) {
             parseAlterTableStatement(builder);
         }
+        else if (token == SqlKeywordTokenTypes.ANALYZE_KEYWORD) {
+            parseAnalyzeStatement(builder);
+        }
         else {
             builder.error(SqlLocalize.parserStatementExpected());
             builder.advanceLexer();
         }
+    }
+
+    /**
+     * Parses {@code ANALYZE TABLE tableRef [, tableRef]…} &mdash; the form used
+     * by MySQL, MariaDB and Oracle. The {@code TABLE} keyword is required.
+     * <p>
+     * Dialects without a {@code TABLE} keyword (PostgreSQL, SQLite) override
+     * this method to accept their bare form.
+     */
+    protected void parseAnalyzeStatement(PsiBuilder builder) {
+        PsiBuilder.Marker mark = builder.mark();
+        expectKeyword(builder, SqlKeywordTokenTypes.ANALYZE_KEYWORD, SqlLocalize.parserStatementExpected());
+
+        expectKeyword(builder, SqlKeywordTokenTypes.TABLE_KEYWORD, SqlLocalize.parserTableExpected());
+
+        parseAnalyzeTableRef(builder);
+        while (isToken(builder, SqlTokenType.COMMA)) {
+            builder.advanceLexer();
+            parseAnalyzeTableRef(builder);
+        }
+
+        mark.done(SqlCompositeElementTypes.ANALYZE_STATEMENT);
+    }
+
+    protected void parseAnalyzeTableRef(PsiBuilder builder) {
+        PsiBuilder.Marker tableMark = builder.mark();
+        parseQualifiedName(builder);
+        tableMark.done(SqlCompositeElementTypes.TABLE_EXPRESSION);
     }
 
     // =================== SELECT ===================

@@ -1,0 +1,9 @@
+SQL_FILE
+  SqlAnalyzeStatementImpl(SQL_ANALYZE_STATEMENT)
+    PsiElement(ANALYZE_KEYWORD)('ANALYZE')
+    PsiWhiteSpace(' ')
+    SqlTableExpressionImpl(SQL_TABLE_EXPRESSION)
+      SqlReferenceExpressionImpl(SQL_REFERENCE_EXPRESSION)
+        PsiElement(SQL_IDENTIFIER)('customers')
+  PsiElement(SQL_SEMICOLON)(';')
+  PsiWhiteSpace('\n')
