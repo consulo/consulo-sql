@@ -26,28 +26,9 @@ import java.util.function.Supplier;
  */
 @ExtensionImpl
 public class SqlDialectConfigurable extends PerFileConfigurableBase<LanguageVersion> implements ProjectConfigurable {
-    private final Trinity<String, Supplier<LanguageVersion>, Consumer<LanguageVersion>> myProjectMapping;
-
     @Inject
     public SqlDialectConfigurable(Project project, SqlDialectService mappings) {
         super(project, mappings);
-        myProjectMapping =
-            Trinity.create(LanguageLocalize.perfileconfigurablebaseProjectMapping(LanguageLocalize.perfileconfigurablebaseMappingTitle()).get(), () -> mappings.getConfiguredMapping(null), o -> myMappings.setMapping(null, o));
-    }
-
-    @Override
-    protected boolean isProjectMapping(Trinity<String, Supplier<LanguageVersion>, Consumer<LanguageVersion>> prop) {
-        return prop == myProjectMapping;
-    }
-
-    @Override
-    protected List<Trinity<String, Supplier<LanguageVersion>, Consumer<LanguageVersion>>> getDefaultMappings() {
-        return List.of(myProjectMapping);
-    }
-
-    @Override
-    protected @Nullable <S> Object getParameter(Key<S> key) {
-        return null;
     }
 
     @Override
