@@ -17,6 +17,7 @@
 package consulo.sql.language.impl.psi;
 
 import consulo.language.ast.IElementType;
+import consulo.language.ast.StandardTokenTypes;
 import consulo.language.ast.TokenSet;
 import consulo.language.ast.TokenType;
 import consulo.sql.language.SqlLanguage;
@@ -25,7 +26,7 @@ import consulo.sql.language.SqlLanguage;
  * @author VISTALL
  * @since 22/10/2021
  */
-public interface SqlTokenType extends TokenType {
+public interface SqlTokenType extends StandardTokenTypes {
     IElementType IDENTIFIER = new IElementType("SQL_IDENTIFIER", SqlLanguage.INSTANCE);
 
     IElementType COMMA = new IElementType("SQL_COMMA", SqlLanguage.INSTANCE);
